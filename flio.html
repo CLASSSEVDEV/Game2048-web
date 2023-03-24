@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Navigation Bar Example</title>
+	<style>
+		/* Basic styles for the navigation bar */
+		nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+		}
+
+		/* Style for the navigation links */
+		nav ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+		}
+
+		nav ul li {
+			margin-right: 10px;
+		}
+
+		nav ul li:last-child {
+			margin-right: 0;
+		}
+
+		nav ul li a {
+			color: #fff;
+			text-decoration: none;
+			padding: 10px;
+			display: block;
+			border-radius: 5px;
+			transition: background-color 0.2s ease;
+		}
+
+		nav ul li a:hover {
+			background-color: #555;
+		}
+
+		/* Style for the brand/logo */
+		nav .brand {
+			font-size: 24px;
+			font-weight: bold;
+		}
+  .any{
+      background: aqua;
+      opacity:1;
+      transition:opacity 269ms;      
+  }
+  .any{
+      opacity:0;
+  }
+	</style>
+</head>
+<body>
+	<nav>
+		<div class="brand">Brand Name</div>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Products</a></li>
+			<li><a href="#">Contact Us</a></li>
+		</ul>
+	</nav>
+	<span class="any">Shit</span>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2048 Game</title>
+    <style>
+      /* Styling for game board */
+      #game-board {
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+        height: 500px;
+        background-color: #bbada0;
+        border: 10px solid #bbada0;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-top: 50px;
+        box-sizing: border-box;
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 500px;
+      }
+      
+      /* Styling for game tiles */
+      .tile {
+        width: 100px;
+        height: 100px;
+        background-color: #cdc1b4;
+        border-radius: 6px;
+        margin: 10px;
+        box-sizing: border-box;
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100px;
+      }
+      
+      /* Styling for game score */
+      #game-score {
+        width: 500px;
+        height: 50px;
+        background-color: #bbada0;
+        border: 10px solid #bbada0;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-top: 20px;
+        box-sizing: border-box;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 50px;
+      }
+    </style>
+  </head>
+  
+  <body onload="startGame()">
+    <div id="game-board"></div>
+    <div id="game-score">Score: 0</div>
+    
+    <script>
+      // Game logic
+      
+      // Initialize game board and score
+      var gameBoard = [];
+      var score = 0;
+      
+      // Generate random number (2 or 4) for new tile
+      function generateNumber() {
+        return Math.random() < 0.9 ? 2 : 4;
+      }
+      
+      // Add new tile to game board
+      function addTile() {
+        // Generate random position
+        var row = Math.floor(Math.random() * 4);
+        var col = Math.floor(Math.random() * 4);
+        // Check if position is already occupied
+        while (gameBoard[row][col] !== 0) {
+          row = Math.floor(Math.random() * 4);
+          col = Math.floor(Math.random() * 4);
+        }
+        // Add new tile to game board
+        gameBoard[row][col] = generateNumber();
+      }
+      
+      // Start new game
+      function startGame() {
+        // Initialize game board with all tiles set to 0
+        gameBoard = [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ];
+        // Add two new tiles to game board
+        addTile();
+        addTile();
+        // Update game board display
+        updateBoard();
+      }
+      
+      // Update game board display
+      function updateBoard() {
+        // Get game board and score elements
+        var board = document.getElementById("game-board");
+        var scoreElement = document.getElementById("game-score");
+        // Clear current board display
+    board.innerHTML = "";
+    // Loop through game board and create new tile elements
+    for (var row = 0; row < gameBoard.length; row++) {
+      for (var col = 0; col < gameBoard[row].length; col++) {
+        var tile = document.createElement("div");
+        tile.classList.add("tile");
+        tile.textContent = gameBoard[row][col] === 0 ? "" : gameBoard[row][col];
+        // Set tile color based on value
+        switch (gameBoard[row][col]) {
+          case 0:
+            tile.style.backgroundColor = "#cdc1b4";
+            break;
+          case 2:
+            tile.style.backgroundColor = "#eee4da";
+            break;
+          case 4:
+            tile.style.backgroundColor = "#ede0c8";
+            break;
+          case 8:
+            tile.style.backgroundColor = "#f2b179";
+            break;
+          case 16:
+            tile.style.backgroundColor = "#f59563";
+            break;
+          case 32:
+            tile.style.backgroundColor = "#f67c5f";
+            break;
+          case 64:
+            tile.style.backgroundColor = "#f65e3b";
+            break;
+          case 128:
+            tile.style.backgroundColor = "#edcf72";
+            break;
+          case 256:
+            tile.style.backgroundColor = "#edcc61";
+            break;
+          case 512:
+            tile.style.backgroundColor = "#edc850";
+            break;
+          case 1024:
+            tile.style.backgroundColor = "#edc53f";
+            break;
+          case 2048:
+            tile.style.backgroundColor = "#edc22e";
+            break;
+          default:
+            tile.style.backgroundColor = "#3c3a32";
+            break;
+        }
+        // Append tile to game board
+        board.appendChild(tile);
+      }
+    }
+    // Update score display
+    scoreElement.textContent = "Score: " + score;
+  }
+  
+  // Check if game is over
+  function checkGameOver() {
+    // Check if any empty tiles remain
+    for (var row = 0; row < gameBoard.length; row++) {
+      for (var col = 0; col < gameBoard[row].length; col++) {
+        if (gameBoard[row][col] === 0) {
+          return false;
+        }
+      }
+    }
+    // Check if any adjacent tiles have same value
+    for (var row = 0; row < gameBoard.length; row++) {
+      for (var col = 0; col < gameBoard[row].length; col++) {
+        if (col !== gameBoard[row].length - 1 && gameBoard[row][col] === gameBoard[row][col+1]) {
+          return false;
+        }
+        if (row !== gameBoard.length - 1 && gameBoard[row][col] === gameBoard[row+1][col]) {
+          return false;
+        }
+      }
+    }
+    // Game is over
+    return true;
+  }
+  
+  // Merge tiles in specified direction
+  function mergeTiles(direction) {
+    // Initialize variables for direction vector and starting position
+    var vector;
+    var startRow, startCol;
+    if (direction === "up") {
+      vector = [-1, 0];
+      startRow = 1;
+      startCol = 0;
+    } else if (direction === "down") {
+      vector = [1, 0];
+      startRow = 2;
+      startCol = 0;
+    } else if (direction === "left") {
+      vector = [0, -1];
+      startRow = 0;
+      startCol = 1;
+    } else if (direction === "right") {
+      vector = [0, 1];
+      startRow = 0;
+      startCol = 2;
+    }
+    var merged = false;
+    do {
+      merged = false;
+      // Loop through tiles in specified direction
+      for (var row = startRow; row >= 0 && row < gameBoard.length; row += vector[0]) {
+        for (var col = startCol; col >= 0 && col < gameBoard[row].length; col += vector[1]) {
+          // Check if tile can be merged with adjacent tile in specified direction
+          var nextRow = row + vector[0];
+          var nextCol = col + vector[1];
+          if (nextRow >= 0 && nextRow < gameBoard.length && nextCol >= 0 && nextCol < gameBoard[row].length) {
+            if (gameBoard[row][col] !== 0 && gameBoard[row][col] === gameBoard[nextRow][nextCol]) {
+              // Merge tiles
+              gameBoard[nextRow][nextCol] *= 2;
+              gameBoard[row][col] = 0;
+              score += gameBoard[nextRow][nextCol];
+              merged = true;
+            }
+          }
+        }
+      }
+    } while (merged);
+  }
+  
+  // Add a new tile to the game board
+  function addTile() {
+    // Find empty tiles on game board
+    var emptyTiles = [];
+    for (var row = 0; row < gameBoard.length; row++) {
+      for (var col = 0; col < gameBoard[row].length; col++) {
+        if (gameBoard[row][col] === 0) {
+          emptyTiles.push([row, col]);
+        }
+      }
+    }
+    // Randomly select an empty tile to add new tile
+    if (emptyTiles.length > 0) {
+      var tileIndex = Math.floor(Math.random() * emptyTiles.length);
+      var tileRow = emptyTiles[tileIndex][0];
+      var tileCol = emptyTiles[tileIndex][1];
+      // Set value of new tile to 2 or 4 with 90%/10% probability respectively
+      gameBoard[tileRow][tileCol] = Math.random() < 0.9 ? 2 : 4;
+    }
+  }
+  
+  // Handle key press events
+  function handleKeyPress(event) {
+    if (!gameOver) {
+      var direction;
+      switch (event.keyCode) {
+        case 38:
+          direction = "up";
+          break;
+        case 40:
+          direction = "down";
+          break;
+        case 37:
+          direction = "left";
+          break;
+        case 39:
+          direction = "right";
+          break;
+        default:
+          return;
+      }
+      // Merge tiles in specified direction and add new tile
+      mergeTiles(direction);
+      addTile();
+      // Check if game is over and update game board
+      gameOver = checkGameOver();
+      updateBoard();
+      // Show game over message if game is over
+      if (gameOver) {
+        alert("Game over!");
+      }
+    }
+  }
+  
+  // Initialize game
+  function initGame() {
+    // Set up event listener for key press events
+    document.addEventListener("keydown", handleKeyPress);
+    // Add two new tiles to game board
+    addTile();
+    addTile();
+    // Update game board
+    updateBoard();
+  }
+  
+  // Start game
+  initGame();    
+</script>
+</body>
+</html>
